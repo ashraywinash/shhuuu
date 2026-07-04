@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Whispr — Private conversations",
-  description: "A quiet, end-to-end encrypted place to talk.",
+  title: "shhuuu — Fast, private conversations",
+  description: "Fast, direct conversations with end-to-end encrypted messages and media.",
 };
 
 export const viewport: Viewport = {

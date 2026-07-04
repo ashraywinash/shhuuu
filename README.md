@@ -1,6 +1,6 @@
-# Whispr
+# shhuuu
 
-Whispr is a responsive pseudonymous direct-messaging app built for Vercel and Supabase. People create a unique pseudonym and password, search authenticated platform members, and exchange client-side encrypted text, images, videos, emoji reactions, read receipts, typing state, and presence.
+shhuuu is a responsive pseudonymous direct-messaging app built for Vercel and Supabase. Its name evokes the sound of a fast arrow: communication that moves directly and quickly. People create a unique pseudonym and password, search authenticated platform members, and exchange client-side encrypted text, images, videos, replies, emoji reactions, read receipts, typing state, and presence.
 
 ## What is included
 
@@ -11,6 +11,9 @@ Whispr is a responsive pseudonymous direct-messaging app built for Vercel and Su
 - Participant-only database, Storage, Realtime, and RPC policies
 - Searchable member directory available only after authentication
 - Direct conversations, optimistic sending, read state, typing, and presence
+- Encrypted message replies with quoted context and jump-to-original behavior
+- Full-screen previews for decrypted images
+- Opt-in, privacy-preserving browser notifications
 - Identity safety numbers with device-local verification pinning
 - Responsive desktop and mobile layouts plus a no-credentials demo mode
 - CSP and browser security headers for Vercel
@@ -30,7 +33,7 @@ Requirements: Node.js 20.9 or newer and a Supabase project.
 3. In Supabase Authentication settings:
 
    - Keep the Email provider enabled.
-   - Turn **Confirm email** off. Whispr maps pseudonyms to internal non-deliverable addresses and does not collect inboxes.
+   - Turn **Confirm email** off. shhuuu maps pseudonyms to internal non-deliverable addresses and does not collect inboxes.
    - Set the minimum password length to at least 12.
    - Enable CAPTCHA and Supabase password protections before a public launch.
 
@@ -76,6 +79,7 @@ The cryptographic test suite covers cross-participant ECDH agreement, password k
 ## Operational notes
 
 - Uploaded files are capped at 25 MB and encrypted in browser memory before upload.
+- Browser notifications are opt-in, omit message text, and work while the app remains open in a background tab or window.
 - The initial sync loads the latest 2,000 encrypted events across a user’s conversations. Add cursor pagination before operating at large history volumes.
 - There is intentionally no password-reset flow: without a verified recovery channel, resetting a password would either enable account takeover or make the previous private key unrecoverable.
 - Account deletion and key rotation require a deliberate product policy and are not exposed in this first release.

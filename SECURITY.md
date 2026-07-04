@@ -1,12 +1,13 @@
-# Whispr security model
+# shhuuu security model
 
-Whispr is designed so an honest-but-curious database or storage administrator can see ciphertext but cannot derive message or media plaintext. This implementation has not received an independent cryptographic audit and should not be treated as a Signal replacement for high-risk users.
+shhuuu is designed so an honest-but-curious database or storage administrator can see ciphertext but cannot derive message or media plaintext. This implementation has not received an independent cryptographic audit and should not be treated as a Signal replacement for high-risk users.
 
 ## What is end-to-end encrypted
 
 The following values are serialized and encrypted in the sender’s browser before transmission:
 
 - Text and emoji content
+- Reply target and quoted reply context
 - Media filename, MIME type, and encrypted object path
 - Image and video bytes
 - Reaction emoji and target event
@@ -49,13 +50,15 @@ Global pseudonym search and server-routed delivery require some metadata to rema
 
 This metadata can reveal social relationships and activity patterns even though it cannot reveal content. Claiming that *all* server data is opaque would be incompatible with global pseudonym search and practical message routing.
 
+Opt-in browser notifications deliberately omit text content, but the device notification surface can still reveal the sender pseudonym and whether the event is a photo or video.
+
 ## Administrator and frontend compromise
 
 An administrator reading database backups or Storage objects cannot decrypt existing content without a participant’s private key or password. However:
 
 - A malicious administrator who can change public keys could attempt key substitution for future conversations. People should compare and pin safety numbers through a different trusted channel.
 - A party able to deploy modified frontend JavaScript can steal future passwords or plaintext as users type. Protect Vercel ownership, require MFA, restrict deploy access, review dependencies, and monitor production changes.
-- A weak password permits offline guessing against the wrapped private key if the vault is copied. Whispr enforces 12 characters, but passphrases should be substantially stronger.
+- A weak password permits offline guessing against the wrapped private key if the vault is copied. shhuuu enforces 12 characters, but passphrases should be substantially stronger.
 
 No web application can protect plaintext on an already compromised endpoint.
 
@@ -66,7 +69,7 @@ No web application can protect plaintext on an already compromised endpoint.
 - Attachment encryption buffers the complete file in browser memory and is therefore limited to 25 MB.
 - Local safety-number pinning is per browser profile and does not synchronize between devices.
 
-Before using Whispr for high-risk communications, replace the static ECDH scheme with a well-reviewed Signal Double Ratchet implementation, add device verification and key transparency, commission an independent audit, and publish a reproducible client build.
+Before using shhuuu for high-risk communications, replace the static ECDH scheme with a well-reviewed Signal Double Ratchet implementation, add device verification and key transparency, commission an independent audit, and publish a reproducible client build.
 
 ## Production checklist
 

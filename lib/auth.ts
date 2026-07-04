@@ -13,6 +13,7 @@ export type UnlockedAccount = {
 };
 
 function usernameEmail(username: string) {
+  // Keep the legacy namespace stable so accounts created before the shhuuu rebrand can still sign in.
   return `${username}@users.whispr.local`;
 }
 
@@ -52,7 +53,7 @@ export async function createAccount(usernameInput: string, passwordInput: string
     if (error.message.toLowerCase().includes("database")) throw new Error("That pseudonym is already taken.");
     throw error;
   }
-  if (!data.user || !data.session) throw new Error("Account created, but sign-in is waiting for email confirmation. Disable email confirmation in Supabase Auth because Whispr uses pseudonyms without inboxes.");
+  if (!data.user || !data.session) throw new Error("Account created, but sign-in is waiting for email confirmation. Disable email confirmation in Supabase Auth because shhuuu uses pseudonyms without inboxes.");
   return { user: data.user, profile: { id: data.user.id, username, public_key: identity.publicKey }, privateKey: identity.privateKey } satisfies UnlockedAccount;
 }
 

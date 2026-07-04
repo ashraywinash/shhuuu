@@ -16,10 +16,20 @@ export type MediaPayload = {
   iv?: string;
 };
 
+export type ReplyReference = {
+  id: string;
+  senderId: string;
+  kind: "text" | "media";
+  text?: string;
+  mediaName?: string;
+  mediaMime?: string;
+};
+
 export type DecryptedPayload = {
   kind: MessageKind;
   text?: string;
   media?: MediaPayload;
+  replyTo?: ReplyReference;
   targetId?: string;
   emoji?: string;
   lastReadId?: string;

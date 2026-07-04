@@ -85,6 +85,7 @@ export async function deriveConversationKey(privateKey: CryptoKey, publicKey: Js
   const peerKey = await crypto.subtle.importKey("jwk", publicKey, { name: "ECDH", namedCurve: "P-256" }, false, []);
   const sharedSecret = await crypto.subtle.deriveBits({ name: "ECDH", public: peerKey }, privateKey, 256);
   const material = await crypto.subtle.importKey("raw", sharedSecret, "HKDF", false, ["deriveKey"]);
+  // These legacy protocol labels are cryptographic inputs. Renaming them would make existing history undecryptable.
   const salt = await crypto.subtle.digest("SHA-256", encoder.encode(`whispr:${conversationId}`));
   return crypto.subtle.deriveKey(
     { name: "HKDF", hash: "SHA-256", salt, info: encoder.encode("whispr-direct-message-v1") },

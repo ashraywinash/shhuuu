@@ -37,11 +37,11 @@ export function AuthScreen({ onAuthenticated, onDemo }: Props) {
   return (
     <main className="auth-page">
       <section className="auth-story">
-        <div className="auth-brand"><span className="brand-mark">w</span><span>whispr</span></div>
+        <div className="auth-brand"><span className="brand-mark"><Icon name="brand" /></span><span>shhuuu</span></div>
         <div className="story-copy">
           <span className="eyebrow"><Icon name="lock" /> Private by design</span>
-          <h1>Say what you mean.<br /><em>Only they’ll know.</em></h1>
-          <p>Simple conversations, encrypted before they ever leave your device.</p>
+          <h1>Messages that move.<br /><em>Privacy that stays.</em></h1>
+          <p>Fast, direct conversations—encrypted before they ever leave your device.</p>
         </div>
         <div className="privacy-points">
           <span><b>01</b> No phone number</span>
@@ -53,7 +53,7 @@ export function AuthScreen({ onAuthenticated, onDemo }: Props) {
       <section className="auth-panel">
         <div className="auth-card">
           <div className="auth-heading">
-            <span className="mobile-brand"><span className="brand-mark">w</span> whispr</span>
+            <span className="mobile-brand"><span className="brand-mark"><Icon name="brand" /></span> shhuuu</span>
             <h2>{mode === "signin" ? "Welcome back" : "Choose your pseudonym"}</h2>
             <p>{mode === "signin" ? "Unlock your private conversations." : "No email, phone number, or real name required."}</p>
           </div>
@@ -69,7 +69,7 @@ export function AuthScreen({ onAuthenticated, onDemo }: Props) {
             {mode === "signup" && <label><span>Confirm password</span><div className="field"><input type="password" autoComplete="new-password" value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)} minLength={12} maxLength={128} required placeholder="Repeat your password" /></div></label>}
             {mode === "signup" && <div className="recovery-warning"><Icon name="info" /><span><strong>There is no password reset.</strong> Your password protects your private key. If you lose it, nobody—including the admin—can recover your chats.</span></div>}
             {error && <div className="form-error" role="alert">{error}</div>}
-            <button className="auth-submit" disabled={busy}>{busy ? <span className="spinner" /> : <>{mode === "signin" ? "Unlock whispr" : "Create private account"}<Icon name="arrow" /></>}</button>
+            <button className="auth-submit" disabled={busy}>{busy ? <span className="spinner" /> : <>{mode === "signin" ? "Unlock shhuuu" : "Create private account"}<Icon name="arrow" /></>}</button>
           </form>
 
           {!isSupabaseConfigured && <button className="demo-link" onClick={() => onDemo(username || undefined)}>Supabase isn’t connected · <strong>Explore the demo</strong></button>}

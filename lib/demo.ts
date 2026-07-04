@@ -13,6 +13,16 @@ export const DEMO_PEOPLE: PublicProfile[] = [
 
 const now = Date.now();
 const at = (minutesAgo: number) => new Date(now - minutesAgo * 60_000).toISOString();
+const DEMO_TRAIL_IMAGE = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640">
+    <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#a8cfda"/><stop offset="1" stop-color="#f2ddb6"/></linearGradient></defs>
+    <rect width="960" height="640" fill="url(#sky)"/>
+    <path d="M0 420 230 210 410 390 620 150 960 440V640H0Z" fill="#55786a"/>
+    <path d="m510 640 75-180 56-72 48 50-60 82-8 120Z" fill="#e8d4ae"/>
+    <path d="M0 510 190 360 350 470 520 330 690 500 820 390 960 490V640H0Z" fill="#315949" opacity=".9"/>
+    <circle cx="770" cy="118" r="54" fill="#f6edbf" opacity=".9"/>
+  </svg>
+`)}`;
 
 export const DEMO_CONVERSATIONS: Conversation[] = [
   {
@@ -37,6 +47,7 @@ export const DEMO_CONVERSATIONS: Conversation[] = [
     messages: [
       { id: "p1", conversationId: "demo-paper", senderId: "paper", createdAt: at(84), payload: { kind: "text", text: "I found the trail we talked about." } },
       { id: "p2", conversationId: "demo-paper", senderId: "paper", createdAt: at(82), payload: { kind: "text", text: "Sending the photo when I’m back on Wi-Fi." } },
+      { id: "p3", conversationId: "demo-paper", senderId: "paper", createdAt: at(80), payload: { kind: "media", media: { name: "mountain-trail.svg", mime: "image/svg+xml", size: 684, url: DEMO_TRAIL_IMAGE } } },
     ],
   },
   {

@@ -20,9 +20,14 @@ test("two participants derive the same conversation key", async () => {
     deriveConversationKey(alice.privateKey, bob.publicKey, "conversation-1"),
     deriveConversationKey(bob.privateKey, alice.publicKey, "conversation-1"),
   ]);
-  const encrypted = await encryptPayload(aliceKey, "conversation-1", { kind: "text", text: "only us" });
+  const payload = {
+    kind: "text" as const,
+    text: "only us",
+    replyTo: { id: "earlier", senderId: "bob", kind: "text" as const, text: "still private" },
+  };
+  const encrypted = await encryptPayload(aliceKey, "conversation-1", payload);
   const clear = await decryptPayload(bobKey, "conversation-1", encrypted.ciphertext, encrypted.iv);
-  assert.deepEqual(clear, { kind: "text", text: "only us" });
+  assert.deepEqual(clear, payload);
 });
 
 test("a wrapped identity key unlocks only with the right password", async () => {

@@ -22,12 +22,12 @@ export async function assertPseudonymAuthReady() {
   try {
     response = await fetch(`${url}/auth/v1/settings`, { headers: { apikey: publishableKey } });
   } catch {
-    throw new Error("Whispr could not reach Supabase. Check your connection and try again.");
+    throw new Error("shhuuu could not reach Supabase. Check your connection and try again.");
   }
-  if (!response.ok) throw new Error("Whispr could not verify the Supabase Auth configuration.");
+  if (!response.ok) throw new Error("shhuuu could not verify the Supabase Auth configuration.");
   const settings = await response.json() as { external?: { email?: boolean }; mailer_autoconfirm?: boolean };
   if (!settings.external?.email) throw new Error("Enable the Email provider in Supabase Auth before creating pseudonym accounts.");
   if (!settings.mailer_autoconfirm) {
-    throw new Error("Turn off Confirm email in Supabase Auth before creating accounts. Whispr uses private pseudonyms without email inboxes.");
+    throw new Error("Turn off Confirm email in Supabase Auth before creating accounts. shhuuu uses private pseudonyms without email inboxes.");
   }
 }

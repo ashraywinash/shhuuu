@@ -1,4 +1,4 @@
--- Whispr initial schema
+-- shhuuu initial schema
 -- Message bodies, event types, reactions, receipts, filenames, and MIME types are
 -- stored only inside client-side AES-GCM ciphertext.
 

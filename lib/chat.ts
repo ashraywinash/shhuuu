@@ -3,7 +3,7 @@ import type { UnlockedAccount } from "./auth";
 import { countUnreadMessages } from "./chat-state";
 import { decryptMedia, decryptPayload, deriveConversationKey, encryptMedia, encryptPayload } from "./crypto";
 import { getSupabase } from "./supabase";
-import type { ChatMessage, Conversation, DecryptedPayload, PublicProfile } from "./types";
+import type { ChatMessage, Conversation, DecryptedPayload, PublicProfile, ReplyReference } from "./types";
 
 type ConversationRow = {
   id: string;
@@ -136,7 +136,7 @@ export async function sendEncryptedEvent(account: UnlockedAccount, conversation:
   return { id: data.id, conversationId: data.conversation_id, senderId: data.sender_id, createdAt: data.created_at, payload } satisfies ChatMessage;
 }
 
-export async function sendEncryptedMedia(account: UnlockedAccount, conversation: Conversation, file: File, id = crypto.randomUUID()) {
+export async function sendEncryptedMedia(account: UnlockedAccount, conversation: Conversation, file: File, id = crypto.randomUUID(), replyTo?: ReplyReference) {
   const supabase = getSupabase();
   const key = await conversationKey(account, conversation);
   const encryptedFile = await encryptMedia(key, conversation.id, id, await file.arrayBuffer());
@@ -150,6 +150,7 @@ export async function sendEncryptedMedia(account: UnlockedAccount, conversation:
   const payload: DecryptedPayload = {
     kind: "media",
     media: { path, name: file.name, mime: file.type, size: file.size, iv: encryptedFile.iv },
+    replyTo,
   };
   try {
     const message = await sendEncryptedEvent(account, conversation, payload, id);
